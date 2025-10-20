@@ -3,10 +3,7 @@ Proyecto curso 78130_callendes
 Cristian Allendes
  
 Link de GitHub
+https://github.com/callendes2130/comision-78130-Callendes
 
- 
-Si me falta algo, me comentan!
-Espero que asi como va, esta okey.
-Si creo que para el proyecto final, volvere a hacer todo del princio, para mas practica, pero se entiende lo de heredar.
- 
-Gracias!!!
+Tuve serios problemas para terminar. Siguiendo paso a paso los videos no tengo los mismo resultados a los que obtiene el profesor
+Cree la etructura identica a la creada en la clase, pero los models no me generaron las tablas a pesar que fue hecho como espejo que lo realizado por el profesor

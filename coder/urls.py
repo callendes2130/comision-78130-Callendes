@@ -4,3 +4,5 @@ urlpatterns = [
     path("", index, name="index"),
     path("test/", test , name = "test"),
 ]
+
+#test

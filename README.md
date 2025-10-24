@@ -5,8 +5,20 @@ Cristian Allendes
 Link de GitHub
 https://github.com/callendes2130/comision-78130-Callendes
 
-Tuve serios problemas para terminar. Siguiendo paso a paso los videos no tengo los mismo resultados a los que obtiene el profesor
-Cree la etructura identica a la creada en la clase, pero los models no me generaron las tablas a pesar que fue hecho como espejo que lo realizado por el profesor
-Favor agradezco más tiempo para volver a repasar el video para terminanrlo muchas gracias
-Atte
-Cristian Allendes
+Gracias Profesor por los dias extras. Logre dejar mis formularios funcionando al igual que el buscador.
+Mi proyecto es una pagina web para reclutamiento y selección teniendo 3 fomularios para registros de:
+- Pagina inicial
+   http://127.0.0.1:8000/
+  
+- Formulario de procesos de reclutamiento
+   http://127.0.0.1:8000/proceso/nuevo
+
+ -Formulario de datos de candidatos
+   http://127.0.0.1:8000/candidato/nuevo
+
+ -Formulario de entrevistas
+   http://127.0.0.1:8000/entrevista/nuevo
+
+ - lista y buscador de procesos
+   http://127.0.0.1:8000/procesos/
+

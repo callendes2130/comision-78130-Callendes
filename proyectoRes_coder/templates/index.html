@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %} Inicio | Portal de reclutamiento y selección {% endblock %} </title>
+
+
+    <!--
+    <title>Inicio | Portal Reclutamiento y selección</title>
+    -->
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #003366;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .navbar {
+            background-color: #007BFF;
+        }
+
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+        }
+
+        .hero {
+            background-color: #e6f0ff;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #003366;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #336699;
+        }
+
+        .btn-primary {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">dunkin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'proceso_form' %}">Procesos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'candidato_form' %}">Candidatos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'entrevista_form' %}">Entrevistas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'proceso_list' %}">Lista Procesos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    {% block contenido %}
+     
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Bienvenido a portal de reclutamiento y selección</h1>
+            <p>Una plataforma moderna construida con Django y Bootstrap 5.</p>
+            <a href="#" class="btn btn-primary btn-lg mt-3">Comenzar</a>
+        </div>
+    </section>
+     
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; {{ year }} Maribel Fajardo - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
+

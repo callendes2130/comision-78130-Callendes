@@ -1,6 +1,6 @@
-from django.urls import path
-from coder.views import index
-
+from django.urls import path, include
+from .views import index, test
 urlpatterns = [
-path("", index , name="index"),
+    path("", index, name="index"),
+    path("test/", test , name = "test"),
 ]

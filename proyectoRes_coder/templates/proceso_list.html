@@ -112,8 +112,8 @@
                             <td>
                                 <div class="btn-group btn-group-sm">
                                     <a href="#" class="btn btn-outline-primary">Ver</a>
-                                    <a href="#" class="btn btn-outline-warning">Editar</a>
-                                    <a href="#" class="btn btn-outline-danger">Eliminar</a>
+                                    <a href="{% url 'modificar_proceso' p.identificador %}" class="btn btn-outline-warning">Editar</a>
+                                    <a href="{% url 'eliminar_proceso' p.identificador %}" class="btn btn-outline-danger">Eliminar</a>
                                 </div>
                             </td>
                         </tr>

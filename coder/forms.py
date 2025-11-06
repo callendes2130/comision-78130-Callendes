@@ -6,7 +6,8 @@ class T_ProcesoForm(forms.ModelForm):
         model = T_Proceso
         fields = ["identificador","descripcion","cargo", "fechainicio","fechafin","totalpuestos"]
         wodgets = {
-            "identificador": forms.TextInput(attrs={'class': 'form-control'}),
+            #"identificador": forms.TextInput(attrs={'class': 'form-control'}),
+            "identificador": forms.NumberInput(attrs={'class': 'form-control'}),
             "descripcion": forms.TextInput(attrs={'class': 'form-control'}),
             "cargo": forms.TextInput(attrs={'class': 'form-control'}),
             "fechainicio": forms.DateInput(attrs={'type':'date', 'class':'form-control'}) ,

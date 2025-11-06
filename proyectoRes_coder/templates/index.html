@@ -75,6 +75,20 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'candidato_form' %}">Candidatos</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'entrevista_form' %}">Entrevistas</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'proceso_list' %}">Lista Procesos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'curso_list' %}">Lista Cursos</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile_detail' %}">Perfil</a></li>
+                        <li class="nav-item">
+                            <form action="{% url 'accounts:logout' %}" method = "POST" style = "display: online;">
+                                {% csrf_token %}
+                                <button type  ="submit" class = "nav-item nav-link">Cerrar Sesion</button>
+                            </form>
+                        </li>
+                    {% else %}
+                      <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Iniciar sesion</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">Registrarse</a></li>
+                    {% endif %}  
+                    
                 </ul>
             </div>
         </div>
@@ -88,7 +102,7 @@
         <div class="container">
             <h1>Bienvenido a portal de reclutamiento y selección</h1>
             <p>Una plataforma moderna construida con Django y Bootstrap 5.</p>
-            <a href="#" class="btn btn-primary btn-lg mt-3">Comenzar</a>
+            
         </div>
     </section>
      
@@ -97,7 +111,8 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; {{ year }} Maribel Fajardo - Todos los derechos reservados</p>
+            <p>&copy; {{ year }} Cristian Allendes - Todos los derechos reservados</p>
+            <li class="nav-item"><a class="nav-link" href="{% url 'acerca' %}">Acerca de mi</a></li>
         </div>
     </footer>
 

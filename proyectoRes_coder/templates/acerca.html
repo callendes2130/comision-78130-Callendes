@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de Mí | Portal de reclutamiento y selección</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #003366;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .navbar {
+            background-color: #007BFF;
+        }
+
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+        }
+
+        .hero {
+            background-color: #e6f0ff;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #003366;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #336699;
+        }
+
+        .btn-primary {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .about-section {
+            padding: 4rem 0;
+        }
+
+        .profile-img {
+            max-width: 250px;
+            border-radius: 50%;
+            border: 5px solid #007BFF;
+            margin-bottom: 2rem;
+        }
+
+        .attribute-card {
+            background-color: #e6f0ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .attribute-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .attribute-icon {
+            font-size: 2rem;
+            color: #007BFF;
+            margin-bottom: 1rem;
+        }
+
+        .hobby-card {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            margin-bottom: 1.5rem;
+            height: 100%;
+        }
+
+        .hobby-icon {
+            font-size: 2.5rem;
+            color: #0056b3;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">dunkin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'proceso_form' %}">Procesos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'candidato_form' %}">Candidatos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'entrevista_form' %}">Entrevistas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'proceso_list' %}">Lista Procesos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'curso_list' %}">Lista Cursos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile_detail' %}">Perfil</a></li>
+                        <li class="nav-item">
+                            <form action="{% url 'accounts:logout' %}" method = "POST" style = "display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class = "nav-item nav-link" style="background: none; border: none; cursor: pointer;">Cerrar Sesión</button>
+                            </form>
+                        </li>
+                    {% else %}
+                      <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">Registrarse</a></li>
+                    {% endif %}  
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Acerca de Mí</h1>
+            <p>Conoce más sobre el desarrollador de esta plataforma</p>
+        </div>
+    </section>
+
+    <!-- Contenido Acerca de Mí -->
+    <div class="container about-section">
+        <div class="row align-items-center mb-5">
+            <div class="col-md-4 text-center">
+                <!-- Imagen de perfil (puedes reemplazar con tu imagen real) -->
+                <img src="https://via.placeholder.com/250" alt="Cristian Allendes" class="profile-img">
+            </div>
+            <div class="col-md-8">
+                <h2 class="mb-3">Cristian Allendes</h2>
+                <p class="lead">Ingeniero en Informática</p>
+                <p class="mb-4">Soy un profesional chileno apasionado por la tecnología y el desarrollo de soluciones innovadoras. Mi enfoque está en crear aplicaciones web eficientes y fáciles de usar que resuelvan problemas reales.</p>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Nacionalidad:</strong> Chilena</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Profesión:</strong> Ingeniero en Informática</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-12">
+                <h3 class="text-center mb-4">Mis Atributos</h3>
+            </div>
+            <div class="col-md-4">
+                <div class="attribute-card">
+                    <div class="attribute-icon">💡</div>
+                    <h4>Creativo</h4>
+                    <p>Disfruto encontrar soluciones innovadoras a problemas complejos, pensando fuera de lo convencional para crear experiencias únicas.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="attribute-card">
+                    <div class="attribute-icon">📚</div>
+                    <h4>Autodidacta</h4>
+                    <p>Me motiva aprender constantemente nuevas tecnologías y metodologías, manteniéndome actualizado en un campo en constante evolución.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="attribute-card">
+                    <div class="attribute-icon">💻</div>
+                    <h4>Amante de la Tecnología</h4>
+                    <p>La tecnología es mi pasión. Me entusiasma explorar nuevas herramientas y frameworks para mejorar mis habilidades y proyectos.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-center mb-4">Mis Hobbies</h3>
+            </div>
+            <div class="col-md-6">
+                <div class="hobby-card">
+                    <div class="hobby-icon">🎮</div>
+                    <h4>Juegos de Consola</h4>
+                    <p>Disfruto explorar mundos virtuales y desafiar mis habilidades en diferentes géneros de videojuegos, desde aventuras épicas hasta juegos de estrategia.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="hobby-card">
+                    <div class="hobby-icon">🏃‍♂️</div>
+                    <h4>Running</h4>
+                    <p>El running es mi forma favorita de mantenerme activo y despejar la mente. Me ayuda a mantener el equilibrio entre el trabajo y la vida personal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; {{ year }} Cristian Allendes - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

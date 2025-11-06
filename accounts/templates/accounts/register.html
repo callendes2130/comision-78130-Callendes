@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Portal de reclutamiento y selección</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #003366;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .navbar {
+            background-color: #007BFF;
+        }
+
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h2 {
+            color: #003366;
+        }
+
+        .btn-primary {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">dunkin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">                    
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile_detail' %}">Perfil</a></li>
+                        <li class="nav-item">
+                            <form action="{% url 'accounts:logout' %}" method = "POST" style = "display: inline;">
+                                {% csrf_token %}
+                                <button type  ="submit" class = "nav-item nav-link">Cerrar Sesion</button>
+                            </form>
+                        </li>
+                    {% else %}
+                     
+                      <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">Registrarse</a></li>
+                    {% endif %}  
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido de Login -->
+    <div class="container">
+        <div class="login-container">
+            <div class="login-header">
+                <h2>Iniciar Sesión</h2>
+                <p class="text-muted">Accede a tu cuenta</p>
+            </div>
+            
+            <form method="post">
+                {% csrf_token %}
+                
+                <!-- Campo Username -->
+                <div class="mb-3">
+                    <label for="id_username" class="form-label">Usuario</label>
+                    <input type="text" name="username" class="form-control" id="id_username" required>
+                    {% if form.username.errors %}
+                        <div class="text-danger">
+                            {% for error in form.username.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Campo Email -->
+                <div class="mb-3">
+                    <label for="id_email" class="form-label">Correo Electrónico</label>
+                    <input type="email" name="email" class="form-control" id="id_email" required>
+                    {% if form.email.errors %}
+                        <div class="text-danger">
+                            {% for error in form.email.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Campo Contraseña -->
+                <div class="mb-3">
+                    <label for="id_password1" class="form-label">Contraseña</label>
+                    <input type="password" name="password1" class="form-control" id="id_password1" required>
+                    {% if form.password1.errors %}
+                        <div class="text-danger">
+                            {% for error in form.password1.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Campo Confirmar Contraseña -->
+                <div class="mb-3">
+                    <label for="id_password2" class="form-label">Confirmar Contraseña</label>
+                    <input type="password" name="password2" class="form-control" id="id_password2" required>
+                    {% if form.password2.errors %}
+                        <div class="text-danger">
+                            {% for error in form.password2.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Registrarse</button>
+            </form>
+            
+            <div class="text-center mt-3">
+                <p>¿Ya tienes una cuenta? <a href="#">Inicia sesión aquí</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Maribel Fajardo - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

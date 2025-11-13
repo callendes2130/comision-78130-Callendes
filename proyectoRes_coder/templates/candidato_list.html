@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Candidatos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .search-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        .badge-estado {
+            font-size: 0.8em;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+        .candidato-card {
+            transition: transform 0.2s;
+        }
+        .candidato-card:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <!-- Título -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3">Lista de Candidatos</h1>
+            <a href="{% url 'candidato_form' %}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Nuevo Candidato                
+            </a>
+            <a href="{% url 'index' %}" class="btn btn-primary mt-2">
+                    <i class="bi bi-plus-circle"></i> Volver a pantalla principal
+                </a>
+        </div>
+
+        <!-- Formulario de búsqueda -->
+        <div class="search-container">
+            <form method="GET" action="" class="row g-3">
+                <div class="col-md-8">
+                    <input type="text" 
+                           name="q" 
+                           class="form-control" 
+                           placeholder="Buscar por nombre, apellido, email o profesión..." 
+                           value="{{ query2|default:'' }}">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="bi bi-search"></i> Buscar
+                    </button>
+                </div>
+                <div class="col-md-2">
+                    <a href="{% url 'candidato_list' %}" class="btn btn-outline-secondary w-100">
+                        Limpiar
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Resultados de búsqueda -->
+        {% if query2 %}
+        <div class="alert alert-info d-flex justify-content-between align-items-center">
+            <span>
+                {% if candidato %}
+                    Resultados para: "<strong>{{ query2 }}</strong>"
+                {% else %}
+                    No se encontraron resultados para: "<strong>{{ query2 }}</strong>"
+                {% endif %}
+            </span>
+            <span class="badge bg-primary">{{ candidato.count }} candidato(s)</span>
+        </div>
+        {% endif %}
+
+        <!-- Tabla de candidatos -->
+        <div class="table-container">
+            {% if candidato %}
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID Postulante</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Profesión</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for candidato in candidato %}
+                        <tr>
+                            <td>
+                                <strong>{{ candidato.idPostulante }}</strong>
+                            </td>
+                            <td>
+                                {{ candidato.nombreC }}
+                            </td>
+                            <td>
+                                {{ candidato.apellidoC }}
+                            </td>
+                            <td>
+                                {{ candidato.emailC }}
+                            </td>
+                            <td>
+                                <span class="badge bg-info">{{ candidato.profesion }}</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-success badge-estado">
+                                    <i class="bi bi-check-circle"></i> Activo
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="#" class="btn btn-outline-primary">Ver</a>
+                                    <a href="{% url 'modificar_candidato' candidato.idPostulante %}" class="btn btn-outline-warning">Editar</a>
+                                    <a href="{% url 'eliminar_candidato' candidato.idPostulante %}" class="btn btn-outline-danger">Eliminar</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Vista alternativa en cards (opcional) -->
+            <div class="row d-none d-md-block mt-4">
+                <div class="row">
+                    {% for candidato in candidatos %}
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card candidato-card h-100">
+                            <div class="card-header bg-light">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="mb-0">{{ candidato.nombreC }} {{ candidato.apellidoC }}</h6>
+                                    <span class="badge bg-primary">ID: {{ candidato.idPostulante }}</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <i class="bi bi-envelope text-muted"></i>
+                                    <small>{{ candidato.emailC }}</small>
+                                </p>
+                                <p class="card-text">
+                                    <i class="bi bi-briefcase text-muted"></i>
+                                    <small>Profesión: {{ candidato.profesion }}</small>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-white">
+                                <div class="btn-group w-100">
+                                    <a href="{% url 'ver_candidato' candidato.id %}" class="btn btn-sm btn-outline-primary">Ver</a>
+                                    <a href="{% url 'modificar_candidato' candidato.id %}" class="btn btn-sm btn-outline-warning">Editar</a>
+                                    <a href="{% url 'eliminar_candidato' candidato.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% else %}
+            <!-- Estado vacío -->
+            <div class="empty-state">
+                <i class="bi bi-person" style="font-size: 3rem;"></i>
+                <h3 class="mt-3">No hay candidatos registrados</h3>
+                <p class="text-muted">
+                    {% if query2 %}
+                        No se encontraron candidatos que coincidan con tu búsqueda.
+                    {% else %}
+                        No hay candidatos registrados en el sistema.
+                    {% endif %}
+                </p>
+                <a href="{% url 'candidato_form' %}" class="btn btn-primary mt-2">
+                    <i class="bi bi-plus-circle"></i> Registrar primer candidato
+                </a>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Paginación -->
+        {% if candidatos.has_other_pages %}
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center">
+                {% if candidatos.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ candidatos.previous_page_number }}{% if query2 %}&q={{ query2 }}{% endif %}">
+                        <i class="bi bi-chevron-left"></i> Anterior
+                    </a>
+                </li>
+                {% endif %}
+                
+                {% for i in candidatos.paginator.page_range %}
+                <li class="page-item {% if candidatos.number == i %}active{% endif %}">
+                    <a class="page-link" href="?page={{ i }}{% if query2 %}&q={{ query2 }}{% endif %}">{{ i }}</a>
+                </li>
+                {% endfor %}
+                
+                {% if candidatos.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ candidatos.next_page_number }}{% if query2 %}&q={{ query2 }}{% endif %}">
+                        Siguiente <i class="bi bi-chevron-right"></i>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+
+        <!-- Resumen estadístico -->
+        {% if candidatos %}
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="card-title">{{ candidatos.count }}</h4>
+                                <p class="card-text">Total Candidatos</p>
+                            </div>
+                            <i class="bi bi-person" style="font-size: 2rem;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="card-title">{{ profesiones_count }}</h4>
+                                <p class="card-text">Profesiones</p>
+                            </div>
+                            <i class="bi bi-briefcase" style="font-size: 2rem;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

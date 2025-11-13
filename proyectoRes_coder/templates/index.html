@@ -71,12 +71,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'proceso_form' %}">Procesos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'candidato_form' %}">Candidatos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'entrevista_form' %}">Entrevistas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'proceso_list' %}">Lista Procesos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'curso_list' %}">Lista Cursos</a></li>
                     {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'proceso_form' %}">Procesos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'candidato_form' %}">Candidatos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'entrevista_form' %}">Entrevistas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'proceso_list' %}">Lista Procesos</a></li>                    
+                        <li class="nav-item"><a class="nav-link" href="{% url 'candidato_list' %}">Lista Candidatos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'entrevista_list' %}">Lista Entrevistas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'curso_list' %}">Lista Cursos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile_detail' %}">Perfil</a></li>
                         <li class="nav-item">
                             <form action="{% url 'accounts:logout' %}" method = "POST" style = "display: online;">

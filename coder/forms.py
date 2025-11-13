@@ -31,7 +31,7 @@ class T_EntrevistaForm(forms.ModelForm):
     class Meta:
         model = T_Entrevista
         fields = ["idEntrevista","idProcesoE","idPostulanteE", "fechaE","nota"]
-        wodgets = {
+        widgets = {
             "idEntrevista": forms.NumberInput(attrs={'class':'form-control'}),
             "idProcesoE": forms.NumberInput(attrs={'class':'form-control'}),
             "idPostulanteE": forms.TextInput(attrs={'class': 'form-control'}),

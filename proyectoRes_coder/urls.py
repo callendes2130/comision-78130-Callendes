@@ -16,37 +16,32 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import index, test, crear_proceso, crear_candidato, crear_entrevista, lista_procesos, eliminar_proceso, modificar_proceso, acerca
+from .views import index, test, crear_proceso, crear_candidato, crear_entrevista, lista_procesos, eliminar_proceso, modificar_proceso, acerca, lista_candidato, modificar_candidato, eliminar_candidato, update_proceso, lista_entrevista, modificar_entrevista, eliminar_entrevista
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", index, name="index"),
     path("test/", test, name="test"), 
-    path("proceso/nuevo", crear_proceso, name  = "proceso_form"), 
-    path("candidato/nuevo", crear_candidato, name  = "candidato_form"),
-    path("entrevista/nuevo", crear_entrevista, name  = "entrevista_form"),
+
+    path("proceso/nuevo", crear_proceso, name  = "proceso_form"),     
     path("procesos/", lista_procesos, name="proceso_list"),
     path("proceso/<int:identificador>/eliminar", eliminar_proceso, name="eliminar_proceso"),
     path("proceso/<int:identificador>/modificar", modificar_proceso, name="modificar_proceso"),
+
+    path("entrevista/nuevo", crear_entrevista, name  = "entrevista_form"),
+    path("entrevistas/", lista_entrevista, name="entrevista_list"),
+    path("entrevista/<int:idEntrevista>/eliminar", eliminar_entrevista, name="eliminar_entrevista"), 
+    path("entrevista/<int:idEntrevista>/modificar", modificar_entrevista, name="modificar_entrevista"),
+    
+    path("candidato/nuevo", crear_candidato, name  = "candidato_form"),  
+    path("candidatos/", lista_candidato, name="candidato_list"),    
+    path("candidatos/<str:idPostulante>/eliminar", eliminar_candidato, name="eliminar_candidato"),                
+    path("candidatos/<str:idPostulante>/modificar", modificar_candidato, name="modificar_candidato"),
+    
     path("cursos/", include("cursos.urls")),
     path("", include("accounts.urls")),
     path("acerca/", acerca, name = "acerca"),       
 ]
 
-#C:\ProyectoPython\comision-78130-Callendes\accounts\urls.py
-#C:\ProyectoPython\comision-78130-Callendes\coder\templates\coder\index.html
-#C:\ProyectoPython\comision-78130-Callendes\entorno_virtual\Lib\site-packages\django\contrib\admin\templates\coder\index.html 
-
-
-#from django.contrib import admin
-#from django.urls import path, include
-#from . import views
-##from .views import index, test
-
-#urlpatterns = [
-#    path("admin/", admin.site.urls),
-#    path('', views.index),
-#    path("coder/", include("coder.urls")),
-#    path("test/", views.test),
 

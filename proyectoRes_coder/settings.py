@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'coder',
     "cursos",
     "accounts",
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -123,11 +124,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-AUTH_USER_MODEL = "accounts.Perfil"
+#AUTH_USER_MODEL = "accounts.Perfil"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 LOGIN_URL = "login"
-LOGIN_REDIRECT_URL = "profile_detail"
-LOGOUT_REDIRECT_URL = "login"
+LOGIN_REDIRECT_URL = "accounts:profile_detail"
+LOGOUT_REDIRECT_URL = "accounts:login"
+#AUTH_USER_MODEL = 'accounts.Profile'
 

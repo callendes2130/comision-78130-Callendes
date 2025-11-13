@@ -110,23 +110,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'proceso_form' %}">Procesos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'candidato_form' %}">Candidatos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'entrevista_form' %}">Entrevistas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'proceso_list' %}">Lista Procesos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'curso_list' %}">Lista Cursos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a></li>
-                    {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile_detail' %}">Perfil</a></li>
-                        <li class="nav-item">
-                            <form action="{% url 'accounts:logout' %}" method = "POST" style = "display: inline;">
-                                {% csrf_token %}
-                                <button type="submit" class = "nav-item nav-link" style="background: none; border: none; cursor: pointer;">Cerrar Sesión</button>
-                            </form>
-                        </li>
-                    {% else %}
-                      <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">Registrarse</a></li>
-                    {% endif %}  
+                             <a href="{% url 'index' %}" class="btn btn-primary mt-2">
+                    <i class="bi bi-plus-circle"></i> Volver a pantalla principal
+                </a>
                 </ul>
             </div>
         </div>
@@ -145,7 +131,9 @@
         <div class="row align-items-center mb-5">
             <div class="col-md-4 text-center">
                 <!-- Imagen de perfil (puedes reemplazar con tu imagen real) -->
-                <img src="https://via.placeholder.com/250" alt="Cristian Allendes" class="profile-img">
+
+                
+                <img src="" alt="Cristian Allendes" class="profile-img">
             </div>
             <div class="col-md-8">
                 <h2 class="mb-3">Cristian Allendes</h2>

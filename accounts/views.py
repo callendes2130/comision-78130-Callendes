@@ -10,9 +10,8 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            # crea el Profile por si acaso
             Profile.objects.get_or_create(user=user)
-            return redirect("profile_detail")
+            return redirect("accounts:profile_detail")
     else:
         form = RegisterForm()
     return render(request, "accounts/register.html", {"form": form})
@@ -32,7 +31,7 @@ def profile_edit(request):
         if uform.is_valid() and pform.is_valid():
             uform.save()
             pform.save()
-            return redirect("profile_detail")
+            return redirect("accounts:profile_detail")
     else:
         uform = UserUpdateForm(instance=request.user)
         pform = ProfileForm(instance=profile)

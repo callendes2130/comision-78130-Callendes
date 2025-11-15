@@ -79,14 +79,12 @@
     </nav>
 
     <!-- Contenido de profile -->
-    <div class="container">
-        <div class="login-container">
-            <div class="login-header">
-                <h2>Mi perfil</h2>
+    <div class="d-flex align-items-center gap-3 mb-4">       
+               
                  <div class="position-relative">
                     {% if user.profile.avatar %}
                         <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="rounded-circle"
-                        style="width:84px;height:84px;object-fit:cover;">
+                        style="width:184px;height:184px;object-fit:cover;">
                     {% else %}
                         <div class="rounded-circle d-flex align-items-center justify-content-center bg-primary-subtle"
                             style="width:84px;height:84px;">
@@ -94,17 +92,18 @@
                         </div>
                     {% endif %}
                 </div> 
-                <div class="col-md-8">
+                <div class="col-md-20">
                     <div class="card_body">
                         <h4 class="fw-bold" {{ user.get_full_name|default:user.username }} </h4>
+                        <p><strong>Mi perfil</p>
+                        <p><strong>Usuario:</strong> {{ user.username }}</p>
+                        <p><strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }}</p>
                         <p><strong>Email:</strong> {{ user.email }}</p>
-                        <p><strong>Direccion:</strong> {{ user.direccion|default:"-" }} </p>
-                        <p><strong>Pais:</strong> {{ user.pais|default:"-" }} </p>
-                        <p><strong>Fecha de nacimiento:</strong> {{ user.fecha_de_nacimiento|date:"d/m/Y"|default:"-" }} </p>
-                    </div>                     
-                </div>    
-            </div>                        
-        </div>
+                        <p><strong>Direccion:</strong> {{ user.profile.direccion|default:"-" }} </p>
+                        <p><strong>Pais:</strong> {{ user.profile.pais|default:"-" }} </p>
+                        <p><strong>Fecha de nacimiento:</strong> {{ user.profile.fecha_de_nacimiento|date:"d/m/Y"|default:"-" }} </p>
+                    </div>                                           
+                </div>
     </div>
 
     <!-- Footer -->

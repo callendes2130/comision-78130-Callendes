@@ -5,7 +5,7 @@ class T_ProcesoForm(forms.ModelForm):
     class Meta:
         model = T_Proceso
         fields = ["identificador","descripcion","cargo", "fechainicio","fechafin","totalpuestos"]
-        wodgets = {
+        widgets = {
             #"identificador": forms.TextInput(attrs={'class': 'form-control'}),
             "identificador": forms.NumberInput(attrs={'class': 'form-control'}),
             "descripcion": forms.TextInput(attrs={'class': 'form-control'}),

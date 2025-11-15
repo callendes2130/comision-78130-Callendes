@@ -73,6 +73,35 @@
             content: " *";
             color: #e74a3b;
         }
+        /* Estilo para mejorar la apariencia de los inputs de fecha */
+        input[type="date"] {
+            position: relative;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            background: transparent;
+            bottom: 0;
+            color: transparent;
+            cursor: pointer;
+            height: auto;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: auto;
+        }
+        .date-input-wrapper {
+            position: relative;
+        }
+        .date-input-wrapper::after {
+            content: "\F4C5";
+            font-family: "bootstrap-icons";
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #6c757d;
+        }
     </style>
 </head>
 <body>
@@ -163,7 +192,9 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="id_fechainicio" class="form-label required-field">Fecha de Inicio</label>
-                                        {{ form.fechainicio }}
+                                        <div class="date-input-wrapper">
+                                            {{ form.fechainicio }}
+                                        </div>
                                         {% if form.fechainicio.errors %}
                                         <div class="text-danger small">
                                             {{ form.fechainicio.errors }}
@@ -175,7 +206,9 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="id_fechafin" class="form-label">Fecha de Finalización</label>
-                                        {{ form.fechafin }}
+                                        <div class="date-input-wrapper">
+                                            {{ form.fechafin }}
+                                        </div>
                                         {% if form.fechafin.errors %}
                                         <div class="text-danger small">
                                             {{ form.fechafin.errors }}
@@ -246,6 +279,25 @@
                     }, false)
                 })
         })()
+        
+        // Script adicional para mejorar la experiencia con los campos de fecha
+        document.addEventListener('DOMContentLoaded', function() {
+            // Asegurarse de que los campos de fecha tengan el formato correcto
+            const fechaInicio = document.getElementById('id_fechainicio');
+            const fechaFin = document.getElementById('id_fechafin');
+            
+            // Establecer valores mínimos y máximos si es necesario
+            // Por ejemplo, para evitar que se seleccione una fecha de fin anterior a la de inicio
+            if (fechaInicio && fechaFin) {
+                fechaInicio.addEventListener('change', function() {
+                    fechaFin.min = this.value;
+                });
+                
+                fechaFin.addEventListener('change', function() {
+                    fechaInicio.max = this.value;
+                });
+            }
+        });
     </script>
 </body>
 </html>

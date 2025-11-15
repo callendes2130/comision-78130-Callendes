@@ -4,7 +4,7 @@ class T_Proceso(models.Model):
     identificador=models.IntegerField(unique=True)
     descripcion=models.CharField(max_length=50)
     cargo=models.CharField(max_length=100)
-    fechainicio=models.DateField()
+    fechainicio=models.DateField()    
     fechafin=models.DateField()
     totalpuestos=models.IntegerField()
 

@@ -33,18 +33,6 @@ def crear_proceso(request):
         form = T_ProcesoForm()
     return render(request, "proceso_form.html", {'form':form})
 
-def crear_candidato(request):
-    # GET - Pedir informacion a la base de datos
-    # POST - Solicitud para crear/manipular información
-    if request.method == "POST":
-        form = T_CandidatoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("candidato_form")
-    else:
-        form = T_CandidatoForm()
-    return render(request, "candidato_form.html", {'form':form})
-
 def lista_procesos(request):
     query = request.GET.get('q','' )
     if len(query) > 0: #if query
@@ -63,15 +51,6 @@ def eliminar_proceso(request, identificador):
     messages.success(request, "Proceso eliminado correctamente")
     return redirect("proceso_list")
 
-class update_proceso(LoginRequiredMixin, UpdateView):
-    model = T_Proceso
-    form_class = T_ProcesoForm
-    template_name = 'proceso_form.html'
-    success_url = reverse_lazy('proceso_list')
-    # usar RUT como slug:
-    slug_field = 'identificador'
-    slug_url_kwarg = 'identificador'
-
 def modificar_proceso(request, identificador):
     proceso = get_object_or_404(T_Proceso, identificador = identificador)
     if request.method == "POST":
@@ -83,7 +62,34 @@ def modificar_proceso(request, identificador):
         form = T_ProcesoForm(instance=proceso)
     return render(request, "proceso_form.html", {'form':form, 'edicion':True})
 
-#-------------------------------------------------------------------------------
+def visualizar_proceso(request, identificador):
+    proceso = get_object_or_404(T_Proceso, identificador=identificador)
+    return render(request, "proceso_ver.html", {'proceso': proceso})
+
+class update_proceso(LoginRequiredMixin, UpdateView):
+    model = T_Proceso
+    form_class = T_ProcesoForm
+    template_name = 'proceso_form.html'
+    success_url = reverse_lazy('proceso_list')
+    # usar RUT como slug:
+    slug_field = 'identificador'
+    slug_url_kwarg = 'identificador'
+
+
+#-----------------------------------------------------------------------------
+
+def crear_candidato(request):
+    # GET - Pedir informacion a la base de datos
+    # POST - Solicitud para crear/manipular información
+    if request.method == "POST":
+        form = T_CandidatoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("candidato_form")
+    else:
+        form = T_CandidatoForm()
+    return render(request, "candidato_form.html", {'form':form})
+
 
 def lista_candidato(request):
     query2 = request.GET.get('q','' )
@@ -109,6 +115,10 @@ def modificar_candidato(request, idPostulante):
     else:
         form = T_CandidatoForm (instance=candidato)
     return render(request, "candidato_form.html", {'form':form, 'edicion':True})
+
+def visualizar_candidato(request, idPostulante):
+    candidato = get_object_or_404(T_Candidato, idPostulante = idPostulante)
+    return render(request, "candidato_ver.html", {'candidato': candidato})
 
 #-------------------------------------------------------------------------------
 def crear_entrevista(request):
@@ -148,6 +158,10 @@ def eliminar_entrevista(request, idEntrevista):
     entrevista.delete()
     messages.success(request, "Entrevista eliminada correctamente")
     return redirect("entrevista_list")
+
+def visualizar_entrevista(request, idEntrevista):
+    entrevista = get_object_or_404(T_Entrevista, idEntrevista = idEntrevista)
+    return render(request, "entrevista_ver.html", {'entrevista': entrevista})
     
 
 

@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('fecha_de_nacimiento', models.DateField(blank=True, null=True)),
                 ('direccion', models.CharField(blank=True, max_length=100)),
                 ('avatar', models.ImageField(blank=True, null=True, upload_to=accounts.models.avatar_upload_to)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='profile', to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE,  to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

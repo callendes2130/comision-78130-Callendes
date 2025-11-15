@@ -122,7 +122,7 @@
     <section class="hero">
         <div class="container">
             <h1>Acerca de Mí</h1>
-            <p>Conoce más sobre el desarrollador de esta plataforma</p>
+            <p>Cristian Allendes, chileno, ingeniero en informática</p>
         </div>
     </section>
 
@@ -130,24 +130,25 @@
     <div class="container about-section">
         <div class="row align-items-center mb-5">
             <div class="col-md-4 text-center">
-                <!-- Imagen de perfil (puedes reemplazar con tu imagen real) -->
+                 {% if user.profile.avatar %}
+                        <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="rounded-circle"
+                        style="width:184px;height:184px;object-fit:cover;">
+                    {% else %}
+                        <div class="rounded-circle d-flex align-items-center justify-content-center bg-primary-subtle"
+                            style="width:84px;height:84px;">
+                            <i class="bi bi-person fs-1 text-primary"></i>
+                        </div>
+                    {% endif %}
 
                 
-                <img src="" alt="Cristian Allendes" class="profile-img">
+                
             </div>
             <div class="col-md-8">
-                <h2 class="mb-3">Cristian Allendes</h2>
-                <p class="lead">Ingeniero en Informática</p>
-                <p class="mb-4">Soy un profesional chileno apasionado por la tecnología y el desarrollo de soluciones innovadoras. Mi enfoque está en crear aplicaciones web eficientes y fáciles de usar que resuelvan problemas reales.</p>
                 
-                <div class="row">
-                    <div class="col-md-6">
-                        <p><strong>Nacionalidad:</strong> Chilena</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Profesión:</strong> Ingeniero en Informática</p>
-                    </div>
-                </div>
+                <p class="mb-4">Soy un profesional chileno apasionado por la tecnología y el desarrollo de soluciones innovadoras. Mi enfoque está en crear aplicaciones web eficientes y fáciles de usar que resuelvan problemas reales.</p>
+                <p class="mb-4">Este curso ha sido todo un desafio para mi porque estaba algo retiro de las canchas en el mundo del desarrollo con tecnologías vigentes pero con constancia y estudio pude sacar el proyecto adelante.</p>                
+                <p class="mb-4">Dejo mis agradecimientos por los conocimientos compartidos y la pasión que tuvieron de enseñar, gracias</p>
+
             </div>
         </div>
 

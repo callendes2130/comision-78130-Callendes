@@ -80,6 +80,7 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'entrevista_list' %}">Lista Entrevistas</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'curso_list' %}">Lista Cursos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile_detail' %}">Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile_edit' %}">Editar Perfil</a></li>
                         <li class="nav-item">
                             <form action="{% url 'accounts:logout' %}" method = "POST" style = "display: online;">
                                 {% csrf_token %}
